@@ -1,0 +1,419 @@
+USE [CeyhunKutahyaliWebSite]
+GO
+/****** Object:  Table [dbo].[About]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[About](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[AboutText] [nvarchar](max) NULL,
+	[Deleted] [int] NULL,
+	[AboutPictures] [nvarchar](max) NULL,
+ CONSTRAINT [PK_About] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Contact]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Contact](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[PhoneNumber] [nvarchar](20) NULL,
+	[EMail_] [nvarchar](50) NULL,
+	[Address] [nvarchar](max) NULL,
+	[ContactPicture] [nvarchar](max) NULL,
+	[Deleted] [int] NULL,
+ CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HomePictures]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HomePictures](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Picture] [nvarchar](max) NULL,
+	[Deleted] [int] NULL,
+ CONSTRAINT [PK_HomePictures] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductName] [nvarchar](100) NULL,
+	[ProductFeature] [nvarchar](250) NULL,
+	[ProductPicture] [nvarchar](max) NULL,
+	[Deleted] [int] NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User_]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User_](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[NameSurname] [nvarchar](50) NOT NULL,
+	[E-Mail_] [nvarchar](50) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[About_Add]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+CREATE PROCEDURE [dbo].[About_Add]
+
+	 @AboutText nvarchar(50),
+	 @AboutPicture nvarchar(max)
+
+AS
+BEGIN
+
+ Insert into About 
+ (
+ AboutText,
+ AboutPictures,
+ Deleted
+ ) 
+ values
+ (
+ @AboutText, 
+ @AboutPicture,
+ 0
+ )
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[About_Delete]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[About_Delete]
+
+	@id int
+
+AS
+BEGIN
+
+ Update About
+ Set Deleted=1 
+ Where @id=id
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[About_Update]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+CREATE PROCEDURE [dbo].[About_Update]
+
+     @id int,
+	 @AboutText nvarchar(50),
+	 @AboutPicture nvarchar(max)
+
+AS
+BEGIN
+
+ UPDATE About 
+
+ SET
+
+ AboutText = @AboutText,
+ AboutPictures=@AboutPicture
+
+ Where id=@id
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Contact_Add]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+CREATE PROCEDURE [dbo].[Contact_Add]
+
+	 @phoneNumber nvarchar(50),
+	 @email_ nvarchar(30),
+	 @Address_ nvarchar (max),
+	 @pictureContact nvarchar(max)
+
+AS
+BEGIN
+
+ Insert into Contact
+ (
+ PhoneNumber,
+ EMail_,
+ Address,
+ ContactPicture,
+ Deleted
+ ) 
+ values
+ (
+ @phoneNumber,
+ @email_,
+ @Address_,
+ @pictureContact,
+ 0
+ )
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Contact_Delete]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Contact_Delete]
+	@id int
+
+AS
+BEGIN
+
+ Update Contact
+ Set Deleted=1 
+ Where @id=id
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Contact_Update]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Contact_Update]
+
+     @id int,
+	 @phoneNumber nvarchar(50),
+	 @email_ nvarchar(30),
+	 @Address_ nvarchar(max),
+	 @pictureContact nvarchar(max)
+
+AS
+BEGIN
+
+ UPDATE Contact 
+
+ SET
+
+ PhoneNumber=@phoneNumber,
+ EMail_=@email_,
+ Address=@Address_,
+ ContactPicture=@pictureContact
+
+ Where id=@id
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Get_About_Id]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[Get_About_Id]
+@id int
+
+AS
+BEGIN
+
+Select * From About where @id=id
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Get_List_User]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Get_List_User]
+	@UserName nvarchar(50),
+	@Password nvarchar(50)
+AS
+BEGIN
+
+Select * from User_ u
+
+where @UserName = u.UserName
+and @Password = u.Password
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Get_Picture]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[Get_Picture] 
+	 
+AS
+BEGIN
+	SELECT * FROM HomePictures Where Deleted=0
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetList_About]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetList_About]
+
+AS
+BEGIN
+
+Select * from About Where Deleted=0
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetList_Contact]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[GetList_Contact]
+ 
+AS
+BEGIN
+	Select * From Contact Where Deleted=0
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetList_Product]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetList_Product]
+	
+AS
+BEGIN
+
+Select * from Product where Deleted=0
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Product_Add]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[Product_Add]
+
+	 @ProductName nvarchar(50),
+	 @ProductFeature nvarchar(50),
+	 @ProductPicture nvarchar(max)
+
+AS
+BEGIN
+
+ Insert into Product 
+ (
+ ProductName, 
+ ProductFeature, 
+ ProductPicture,
+ Deleted
+ ) 
+ values
+ (
+ @ProductName, 
+ @ProductFeature,
+ @ProductPicture,
+ 0
+ )
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Product_Delete]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE [dbo].[Product_Delete]
+
+	@id int
+
+AS
+BEGIN
+
+ Update Product
+ Set Deleted=1 
+ Where @id=id
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Product_Update]    Script Date: 23.11.2022 22:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Product_Update]
+
+     @id int,
+	 @ProductName nvarchar(50),
+	 @ProductFeature nvarchar(max),
+	 @ProductPicture nvarchar(max)
+
+AS
+BEGIN
+
+ UPDATE Product 
+
+ SET
+
+ProductName =@ProductName,
+ProductFeature=@ProductFeature,
+ProductPicture = @ProductPicture
+
+ Where id=@id
+
+
+END
+GO
