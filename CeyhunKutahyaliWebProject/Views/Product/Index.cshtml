@@ -1,0 +1,44 @@
+﻿
+@using CeyhunKutahyaliWebProject.Models;
+@model List<Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12" style="margin-top:50px;">
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                @*<td>id</td>*@
+                <td>Kategori</td>
+                <td>Ürün Özellikleri</td>
+                <td>Ürün Fotoğrafı</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product _product in Model)
+            {
+                <tr>
+                    @*<td>
+                            @_product.id
+                        </td>*@
+                    <td>
+                        @_product.ProductName
+                    </td>
+                    <td>
+                        @_product.ProductFeature
+                    </td>
+                    <td>
+                        <img class="aw-zoom" src=" @_product.ProductPicture" alt="@_product.ProductName" width="200" height="100" />
+                    </td>
+                    <td>
+                        Sipariş için lütfen iletişime geçin
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

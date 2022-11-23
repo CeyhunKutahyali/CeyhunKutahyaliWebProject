@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ceyhun Ticaret - Admin Paneli</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Ceyhun Ticaret - Admin Paneli", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li><a href="/Product/Index">Ürünler Düzenle</a></li>
+                    <li><a href="/Home/About">Hakkımızda Düzenle</a></li>
+                    <li><a href="/Home/Contact">İletişim Düzenle</a></li>*@
+                    <li><a href="/Home/Index">Çıkış</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ul>
+            <center><a href="/Product/ProductEdit" class="btn btn-success C-button C1-button" style="width:65%; margin-top:50px">Ürünler Sayfasını Düzenle</a></center>
+            <center><a href="/About/AboutEdit" class="btn btn-success C-button C1-button" style="width:65%">Hakkımızda Sayfasını Düzenle</a></center>
+            <center><a href="/Contact/ContactEdit" class="btn btn-success C-button C1-button" style="width:65%">İletişim Sayfasını Düzenle</a></center>
+        </ul>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+ 
+</body>
+</html>

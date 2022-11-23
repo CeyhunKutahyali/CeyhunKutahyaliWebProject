@@ -1,0 +1,41 @@
+﻿
+@using CeyhunKutahyaliWebProject.Models;
+@model List<About>
+
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+
+</head>
+<body>
+    <div style="text-align:center">
+        <br />
+        @foreach (About about in Model)
+        {
+            <img src="@about.AboutPictures" height="550" width="1200" alt="Örnek Resim" border="0" />
+        }
+    </div>
+    <div class="col-md-12" style="margin-top:50px;">
+        <div>
+            <h3 style="text-align: center">Hakkımızda</h3>
+        </div>
+        <div>
+            @foreach (About _about in Model)
+            {
+                <tr>
+                    @*<td>
+                            @_product.id
+                        </td>*@
+                    <td>
+                        @_about.AboutText
+                    </td>
+                </tr>
+            }
+        </div>
+    </div>
+</body>
+</html>

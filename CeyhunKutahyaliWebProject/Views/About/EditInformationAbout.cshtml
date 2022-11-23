@@ -1,0 +1,52 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model AboutDTO
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditInformationAbout</title>
+</head>
+<body>
+    <div class="col-md-12" style="margin-top:50px;">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="/Admin/Index">Önceki sayfaya Dön</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><b>Hakkımızda Yazısı</b></td>
+                    <td><b>Fotoğraf</b></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @using (Html.BeginForm("AboutUpdate", "About", FormMethod.Post))
+                {
+                    foreach (About _about in Model.AboutList)
+                    {
+                        <tr>
+                            <td><input class="hidden" name="id" Value="@_about.id" /></td>
+                            <td>
+                                <textarea rows="10" cols="60" name="aboutText">@_about.AboutText"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="50" name="aboutPictures">@_about.AboutPictures"</textarea>
+                            </td>
+                            <td><button class="btn btn-primary">Kaydet</button></td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

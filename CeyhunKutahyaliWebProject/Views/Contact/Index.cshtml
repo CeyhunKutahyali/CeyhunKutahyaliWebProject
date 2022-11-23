@@ -1,0 +1,50 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model List<Contact>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+</head>
+<body>
+    <div class="row">
+        <br />
+        <h3 style="text-align: center">İLETİŞİM</h3>
+        <br />
+        <hr />
+        @foreach (Contact _contact in Model)
+        {
+            <div>
+                <img src="@_contact.ContactPicture" height="550" width="1200" alt="Örnek Resim" border="0" />
+            </div>
+            <br />
+            <br />
+            <div  class="col-md-12" style="margin-top:50px;">
+                <br />
+                <hr />
+                <table class="table table-responsive table-striped">
+                   <thead>
+                       <tr>
+                           <td><b>Telefon</b></td>
+                           <td><b>E-Mail</b></td>
+                           <td><b>Adres</b></td>
+                       </tr>
+                   </thead>
+                    <tbody>
+                        <tr>
+                            <td>@_contact.PhoneNumber</td>
+                            <td>@_contact.EMail_</td>
+                            <td>@_contact.Address</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,97 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model ProductDTO
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<html>
+<div class="col-md-12" style="margin-top:50px;">
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <td>
+                    <a class="btn btn-sm btn-success" href="/Admin/Index">Önceki sayfaya Dön</a>
+                </td>
+            </tr>
+            <tr>
+                @*<td><b>Ürün Id</b></td>*@
+                <td><b>Ürün Adı</b></td>
+                <td><b>Ürün Açıklaması</b></td>
+                <td><b>Ürün Fotoğrafı</b></td>
+                <td> <button class="btn btn-sm btn-primary" id="btnAdd" onclick="addMenuShow()" title="Yeni ekle">Yeni Ürün Ekle</button></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @using (Html.BeginForm("Add", "Product", FormMethod.Post))
+            {
+                <tr id="addMenu" class="hidden">
+                    <td>
+                        <input type="text" class="form-control" name="productName" placeholder="Ürün Adı Giriniz..." />
+                    </td>
+                    <td>
+                        <textarea type="text" class="form-control" name="productFeature" placeholder="Ürün Açıklaması Giriniz..."></textarea>
+                    </td>
+                    <td>
+                        <input type="url" class="form-control" name="productPicture" placeholder="Ürün Fotoğraf Linki Giriniz..." />
+                    </td>
+                    <td><button class="btn btn-primary">Kaydet</button></td>
+                </tr>
+            }
+
+            @foreach (Product _product in Model.products)
+            {
+                <tr>
+                    @*<td>
+                            @_product.id
+                        </td>*@
+                    <td>
+                        @_product.ProductName
+                    </td>
+                    <td>
+                        @_product.ProductFeature
+                    </td>
+                    <td>
+                        <img class="aw-zoom" src=" @_product.ProductPicture" alt="@_product.ProductName" width="200" height="100" />
+                    </td>
+                    <td>
+                        <a href="/Product/EditInformationProduct?id=@_product.id" class="btn btn-sm btn-primary"><i class="glyphicon-edit" title="Güncelle"></i></a>
+                        <a href="#" class="btn btn-sm btn-danger" onclick="deleteProduct(@_product.id)"><i class="fa fa-trash" aria-hidden="true" title="Sil"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</html>
+
+
+<script type="text/javascript">
+
+    function addMenuShow() {
+
+        if ($("#addMenu").attr("class") == 'hidden') {
+            $("#addMenu").removeClass("hidden");
+            $("#btnAdd").html("Eklemeyi İptal Et");
+            $("#btnAdd").removeClass("btn-primary");
+            $("#btnAdd").addClass("btn-danger");
+            $("#btnAdd").attr("title", "Eklemeyi iptal");
+        }
+        else {
+            $("#addMenu").addClass("hidden");
+            $("#btnAdd").html("Yeni Ürün Ekle");
+            $("#btnAdd").removeClass("btn-danger");
+            $("#btnAdd").addClass("btn-primary");
+            $("#btnAdd").attr("title", "Yeni ekle");
+        }
+    }
+
+
+    function deleteProduct(id) {
+
+        Ajax('/Product/DeleteProduct', "{id: " + id + "}", true);
+
+    }
+
+</script>

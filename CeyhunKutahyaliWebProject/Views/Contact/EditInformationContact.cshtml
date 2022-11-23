@@ -1,0 +1,60 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model ContactDTO
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditInformationProduct</title>
+</head>
+<body>
+    <div class="col-md-12" style="margin-top:50px;">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="/Admin/Index">Önceki sayfaya Dön</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><b>Telefon Numarası</b></td>
+                    <td><b>E-Mail</b></td>
+                    <td><b>Adres</b></td>
+                    <td><b>Fotoğraf</b></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @using (Html.BeginForm("ContactUpdate", "Contact", FormMethod.Post))
+                {
+                    foreach (Contact contact in Model.Contacts)
+                    {
+                        <tr>
+                            <td><input class="hidden" name="id" Value="@contact.id" /></td>
+                            <td>
+                                <textarea rows="10" cols="60" name="phoneNumber">@contact.PhoneNumber"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="60" name="EMail_">@contact.EMail_"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="60" name="Address">@contact.Address"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="60" name="contactPicture">@contact.ContactPicture"</textarea>
+                            </td>
+                            <td><button class="btn btn-primary">Kaydet</button></td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

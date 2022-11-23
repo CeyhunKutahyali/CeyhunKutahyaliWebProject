@@ -1,0 +1,111 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model ContactDTO
+@{
+    ViewBag.Title = "AboutEdit";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ContactEdit</title>
+</head>
+<body>
+    <div class="col-md-12" style="margin-top:50px;">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="/Admin/Index">Önceki sayfaya Dön</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Telefon</b></td>
+                    <td><b>E-Mail</b></td>
+                    <td><b>Adres</b></td>
+                    <td><b>Sayfa Fotoğrafı</b></td>
+                    
+                    <td> <button class="btn btn-sm btn-primary" id="btnAdd" onclick="addMenuShow()" title="Yeni ekle">Yeni Ekle</button></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @using (Html.BeginForm("ContactAdd", "Contact", FormMethod.Post))
+                {
+                    <tr id="addMenu" class="hidden">
+                        <td>
+                            <input type="tel" class="form-control" name="phoneNumberContact" placeholder="Yeni Telefon Numarası Giriniz..." />
+                        </td>
+                        <td>
+                            <input type="email" class="form-control" name="emailContact" placeholder="Yeni E-Mail Giriniz..." />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="addressContact" placeholder="Yeni Adres Giriniz..." />
+                        </td>
+                        <td>
+                            <input type="url" class="form-control" name="contactPicture" placeholder="İletişim Sayfası için Yeni Fotoğraf Linki Giriniz..." />
+                        </td>
+
+                        <td><button class="btn btn-primary">Kaydet</button></td>
+                    </tr>
+                }
+                @foreach (Contact _contact in Model.Contacts)
+                {
+                    <tr>
+                        <td>
+                            @_contact.PhoneNumber
+                        </td>
+                        <td>
+                            @_contact.EMail_
+                        </td>
+                        <td>
+                            @_contact.Address
+                        </td>
+                        <td>
+                            @_contact.ContactPicture
+                        </td>
+                        <td>
+                            <a href="/Contact/EditInformationContact?id=@_contact.id" class="btn btn-sm btn-primary"><i class="glyphicon-edit"></i></a>
+                            <a href="#" class="btn btn-sm btn-danger" onclick="deleteContact(@_contact.id)"><i class="fa fa-trash" aria-hidden="true" title="Sil"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
+</html>
+
+<script type="text/javascript">
+
+    function addMenuShow() {
+
+        if ($("#addMenu").attr("class") == 'hidden') {
+            $("#addMenu").removeClass("hidden");
+            $("#btnAdd").html("Eklemeyi İptal Et");
+            $("#btnAdd").removeClass("btn-primary");
+            $("#btnAdd").addClass("btn-danger");
+            $("#btnAdd").attr("title", "Eklemeyi iptal");
+        }
+        else {
+            $("#addMenu").addClass("hidden");
+            $("#btnAdd").html("Yeni Ekle");
+            $("#btnAdd").removeClass("btn-danger");
+            $("#btnAdd").addClass("btn-primary");
+            $("#btnAdd").attr("title", "Yeni ekle");
+        }
+    }
+
+
+    function deleteContact(id) {
+
+        Ajax('/Contact/ContactDelete', "{id: " + id + "}", true);
+
+    }
+
+</script>
+

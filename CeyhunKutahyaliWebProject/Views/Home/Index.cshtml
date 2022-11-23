@@ -1,0 +1,70 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model HomeDTO
+
+@{
+    ViewBag.Title = "Anasayfa";
+}
+
+<html>
+<head>
+
+</head>
+<body>
+    <div style="text-align:center">
+        <br />
+        @foreach (HomePictures _homePicture in Model.homepictures)
+        {
+            <img src="@_homePicture.Picture" height="550" width="1200" alt="Örnek Resim" border="0" />
+        }
+    </div>
+    <br />
+    <br />
+    <hr />
+    <div class="row">
+        <h3 style="text-align: center"><b>HAKKIMIZDA</b></h3>
+        @foreach (About _about in Model.abouts)
+        {
+            <div>
+                <img src="@_about.AboutPictures" height="550" width="1200" alt="Örnek Resim" border="0" />
+            </div>
+            <br />
+            <br />
+            <div>
+                <p>@_about.AboutText</p>
+            </div>
+
+        }
+    </div>
+    <div class="row">
+        <h3 style="text-align: center"><b>İLETİŞİM</b></h3>
+        @foreach (Contact _contact in Model.contacts)
+        {
+            <div>
+                <img src="@_contact.ContactPicture" height="550" width="1200" alt="Örnek Resim" border="0" />
+            </div>
+            <br />
+            <br />
+            <div class="col-md-12" style="margin-top:50px;">
+                <br />
+                <hr />
+                <table class="table table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <td><b>Telefon</b></td>
+                            <td><b>E-Mail</b></td>
+                            <td><b>Adres</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@_contact.PhoneNumber</td>
+                            <td>@_contact.EMail_</td>
+                            <td>@_contact.Address</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</body>
+</html>

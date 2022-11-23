@@ -1,0 +1,56 @@
+﻿@using CeyhunKutahyaliWebProject.Models;
+@model ProductDTO
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditInformationProduct</title>
+</head>
+<body>
+    <div class="col-md-12" style="margin-top:50px;">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="/Admin/Index">Önceki sayfaya Dön</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><b>Ürün Adı</b></td>
+                    <td><b>Ürün Açıklaması</b></td>
+                    <td><b>Ürün Fotoğrafı</b></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @using (Html.BeginForm("ProductUpdate", "Product", FormMethod.Post))
+                {
+                    foreach (Product _product in Model.products)
+                    {
+                        <tr>
+                            <td><input class="hidden" name="id" Value="@_product.id" /></td>
+                            <td>
+                                <textarea rows="10" cols="60" name="productName">@_product.ProductName"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="60" name="productFeature">@_product.ProductFeature"</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="10" cols="60" name="productPicture">@_product.ProductPicture"</textarea>
+                            </td>
+                            <td><button class="btn btn-primary">Kaydet</button></td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
